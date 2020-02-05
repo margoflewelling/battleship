@@ -26,7 +26,7 @@ class Cell
 
    def fired_upon?
      @has_been_fired_upon
-    end
+   end
 
 
     def fire_upon
@@ -43,7 +43,7 @@ class Cell
             "."
           elsif reveal == true && empty? == false
             "S"
-           end
+          end
       else
          if empty? == true
             "M"
@@ -53,6 +53,6 @@ class Cell
              "H"
          end
       end
-     end
+    end
 
 end
