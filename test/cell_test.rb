@@ -1,4 +1,3 @@
-require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/ship'
@@ -36,6 +35,18 @@ class CellTest < Minitest::Test
     assert_equal 2, @cruiser.health
     assert @cell.fired_upon?
   end
+
+  def test_it_can_render
+    assert_equal '.', @cell.render
+    @cell.fire_upon
+    assert_equal 'M', @cell.render
+    @cell_2.place_ship(@cruiser)
+    assert_equal '.', @cell_2.render
+    assert_equal 'S', @cell_2.render(true)
+  end
+
+
+
 
 
 end
