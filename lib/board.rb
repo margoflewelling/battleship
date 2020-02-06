@@ -1,5 +1,6 @@
 class Board
   attr_reader :cells
+  attr_accessor :reveal
 
   def initialize
     @cells = {"A1"=> Cell.new("A1"), "A2" => Cell.new("A2"),
@@ -97,17 +98,13 @@ class Board
     end
 
 
-    def render_board
-      rendered = []
+    def render(reveal = false)
+      @reveal = reveal
+      rendered = ""
       @cells.each do |coordinate, cell|
-      rendered << @cells[coordinate].render
-      require "pry"; binding.pry
+      rendered << @cells[coordinate].render(reveal)
       end
-      rendered.map do |cell_render|
-        cell_render = cell_render[1]
-      end
-
-       p "   1  2  3  4 \n" +
+       p "   1 2 3 4 \n" +
          " A #{rendered[0..3]}\n" +
          " B #{rendered[4..7]}\n" +
          " C #{rendered[8..11]}\n" +

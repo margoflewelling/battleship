@@ -60,7 +60,7 @@ class BoardTest < Minitest::Test
 
       def test_render
         @board.place(@cruiser, ["A1", "A2", "A3"])
-        assert_equal [], @board.render_board
+        assert_equal [], @board.render
       end
 
 

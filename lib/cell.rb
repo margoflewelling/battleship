@@ -36,23 +36,13 @@ class Cell
       @has_been_fired_upon = true
     end
 
+
     def render(reveal = false)
       @reveal = reveal
-      if fired_upon? == false
-          if reveal == false
-            "."
-          elsif reveal == true && empty? == false
-            "S"
-          end
-      else
-         if empty? == true
-            "M"
-         elsif ship.sunk? == true
-             "X"
-         else
-             "H"
-         end
-      end
+    return "S" if reveal == true && fired_upon? == false
+    return "." if fired_upon? == false
+    return "M" if empty? == true
+    return "X" if ship.sunk? == true
+    return "H"
     end
-
 end
