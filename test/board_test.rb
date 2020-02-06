@@ -60,7 +60,24 @@ class BoardTest < Minitest::Test
 
       def test_render
         @board.place(@cruiser, ["A1", "A2", "A3"])
-        assert_equal [], @board.render
+        expected = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+        assert_equal expected, @board.render
+
+        true_expected = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+        assert_equal true_expected, @board.render(true)
+
+        cell_1 = @board.cells["A1"]
+        cell_1.fire_upon
+        cell_8 = @board.cells["B4"]
+        cell_8.fire_upon
+        @board.place(@submarine, ["C1", "D1"])
+        cell_9 = @board.cells["C1"]
+        cell_13 = @board.cells["D1"]
+        cell_9.fire_upon
+        cell_13.fire_upon
+        hits_expected = "  1 2 3 4 \nA H . . . \nB . . . M \nC X . . . \nD X . . . \n"
+        assert_equal hits_expected, @board.render 
+
       end
 
 

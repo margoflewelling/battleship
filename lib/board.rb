@@ -103,12 +103,13 @@ class Board
       rendered = ""
       @cells.each do |coordinate, cell|
       rendered << @cells[coordinate].render(reveal)
+      rendered << " "
       end
-       p "   1 2 3 4 \n" +
-         " A #{rendered[0..3]}\n" +
-         " B #{rendered[4..7]}\n" +
-         " C #{rendered[8..11]}\n" +
-         " D #{rendered[12..15]}\n"
+       p "  1 2 3 4 \n" +
+         "A #{rendered[0..7]}\n" +
+         "B #{rendered[8..15]}\n" +
+         "C #{rendered[16..23]}\n" +
+         "D #{rendered[24..-1]}\n"
     end
 
 end
