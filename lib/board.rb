@@ -21,8 +21,8 @@ class Board
   end
 
   def valid_placement?(ship, placement)
-    if ship.length == placement.length && consecutive_placements(placement) == true
-       if no_overlapping_ships?(placement) == true
+    if ship.length == placement.length && consecutive_placements(placement)
+       if no_overlapping_ships?(placement)
         true
        else
         false
@@ -39,9 +39,9 @@ class Board
       @coordinate_letters << coordinate[0]
       @coordinate_numbers << coordinate[1].to_i
       end
-    if @coordinate_letters.uniq.size == 1 && valid_numbers == true
+    if @coordinate_letters.uniq.size == 1 && valid_numbers
       true
-    elsif @coordinate_numbers.uniq.size ==1 && valid_letters == true
+    elsif @coordinate_numbers.uniq.size == 1 && valid_letters
       true
     else
       false
@@ -97,7 +97,21 @@ class Board
     end
 
 
-    # def render
-    # end
+    def render_board
+      rendered = []
+      @cells.each do |coordinate, cell|
+      rendered << @cells[coordinate].render
+      require "pry"; binding.pry
+      end
+      rendered.map do |cell_render|
+        cell_render = cell_render[1]
+      end
+
+       p "   1  2  3  4 \n" +
+         " A #{rendered[0..3]}\n" +
+         " B #{rendered[4..7]}\n" +
+         " C #{rendered[8..11]}\n" +
+         " D #{rendered[12..15]}\n"
+    end
 
 end
