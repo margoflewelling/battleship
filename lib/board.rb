@@ -20,4 +20,84 @@ class Board
     end
   end
 
+  def valid_placement?(ship, placement)
+    if ship.length == placement.length && consecutive_placements(placement) == true
+       if no_overlapping_ships?(placement) == true
+        true
+       else
+        false
+       end
+    else
+      false
+    end
+  end
+
+  def consecutive_placements(placement)
+    @coordinate_letters = []
+    @coordinate_numbers = []
+    placement.each do |coordinate|
+      @coordinate_letters << coordinate[0]
+      @coordinate_numbers << coordinate[1].to_i
+      end
+    if @coordinate_letters.uniq.size == 1 && valid_numbers == true
+      true
+    elsif @coordinate_numbers.uniq.size ==1 && valid_letters == true
+      true
+    else
+      false
+    end
+  end
+
+  def valid_numbers
+    range = 1..4
+    numbers = range.to_a
+    cruiser_number_choices = []
+    sub_number_choices = []
+    numbers.each_cons(3) {|a| cruiser_number_choices << a}
+    numbers.each_cons(2) {|a| sub_number_choices << a}
+    all_number_choices = cruiser_number_choices + sub_number_choices
+    if all_number_choices.include?(@coordinate_numbers)
+      true
+    else
+      false
+    end
+  end
+
+  def valid_letters
+    range = "A" .. "D"
+    letters = range.to_a
+    cruiser_letter_choices = []
+    sub_letter_choices = []
+    letters.each_cons(3) {|a| cruiser_letter_choices << a}
+    letters.each_cons(2) {|a| sub_letter_choices << a}
+    all_letter_choices = cruiser_letter_choices + sub_letter_choices
+    if all_letter_choices.include?(@coordinate_letters)
+      true
+    else
+      false
+    end
+  end
+
+
+    def no_overlapping_ships?(placement)
+      cells_are_empty = []
+      placement.each do |cell|
+        cells_are_empty << @cells[cell].empty?
+      end
+      cells_are_empty.all?
+    end
+
+
+    def place(ship, placement)
+      if valid_placement?(ship, placement)
+        placement.each do |cell|
+        @cells[cell].place_ship(ship)
+        end
+      end
+    end
+
+
+    # def render
+    # end
+
 end
