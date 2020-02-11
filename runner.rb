@@ -5,14 +5,6 @@ require './lib/messages'
 require './play'
 
 
-@message.welcome
-
-response = gets.chomp.upcase
-if response == 'P'
-  @game.play_game
-else 'Ok. Bye!'
-end
-
 
 @comp_board = Board.new
 @player_board = Board.new
@@ -23,6 +15,11 @@ end
 @message = Messages.new(@player_board, @comp_board)
 @game = PlayGame.new(@comp_board, @player_board, @message, @comp_cruiser, @comp_sub, @player_cruiser, @player_sub)
 
-@game.place_the_cruiser
 
-@game.place_the_sub
+@message.welcome
+
+response = gets.chomp.upcase
+if response == 'P'
+  @game.play_game
+else 'Ok. Bye!'
+end
