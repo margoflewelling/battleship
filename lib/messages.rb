@@ -2,8 +2,9 @@ require './lib/board'
 
 
 class Messages
-  def initialize
-
+  def initialize(player_board, comp_board)
+    @player_board = player_board
+    @comp_board = comp_board
   end
 
 
@@ -13,11 +14,18 @@ class Messages
     p 'Enter Q to quit'
   end
 
-  def placement
-    @board = Board.new
-    p 'I have laid out my ships on the grid. You now need to lay out your two ships. The Cruiser is three units long and the Submarine is two units long.'
-    @board.render
+  def place_cruiser
+    p 'I have laid out my cruiser on the grid. You now need to lay out your cruiser. The Cruiser is three units long.'
+    @player_board.render(true)
     p 'Enter the squares for the Cruiser (3 spaces):'
   end
+
+  def place_sub
+    p 'I have laid out my submarine on the grid. You now need to lay out your submarine. The Submarine is two units long.'
+    @player_board.render(true)
+    p 'Enter the squares for the Submarine (2 spaces):'
+  end
+
+
 
 end

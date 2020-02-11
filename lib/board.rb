@@ -105,7 +105,7 @@ class Board
       rendered << @cells[coordinate].render(reveal)
       rendered << " "
       end
-       p "  1 2 3 4 \n" +
+       puts "  1 2 3 4 \n" +
          "A #{rendered[0..7]}\n" +
          "B #{rendered[8..15]}\n" +
          "C #{rendered[16..23]}\n" +
