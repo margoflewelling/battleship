@@ -27,7 +27,7 @@ class Messages
   end
 
   def play_again
-    p "Do you want to play again? (Y/N)"
+    p "Do you want to play again? Enter y if yes!"
   end
 
 end

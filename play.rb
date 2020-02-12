@@ -2,6 +2,29 @@ class PlayGame
 
   attr_reader :board, :message, :cruiser, :submarine
 
+  def ask_to_play
+    loop do
+    @message.welcome
+    @response = gets.chomp.upcase
+    if @response == 'P'
+      play_game
+      @message.play_again
+      @response = gets.chomp.upcase
+      while @response == 'Y'
+        @game = PlayGame.new(@comp_board, @player_board, @message, @comp_cruiser, @comp_sub, @player_cruiser, @player_sub)
+        setup
+        play_game
+        @game.message.play_again
+        @response = gets.chomp.upcase
+      end
+    elsif @response == 'Q'
+      p 'Ok. Bye'
+      break
+    else
+      p 'Invalid response'
+    end
+  end
+  end
 
   def setup
     @comp_board = Board.new
