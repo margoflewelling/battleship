@@ -22,5 +22,6 @@ if response == 'P'
     response = gets.chomp.upcase
   end
   p 'Ok. Good Playing!'
-else 'Ok. Bye!'
+else
+  p 'Ok. Bye!'
 end
