@@ -64,7 +64,7 @@ class PlayGame
     selected_numbers = number_choices.sample(1)
     @coordinates = @placement.zip(selected_numbers)
     @coordinates = @coordinates.map {|coordinate| coordinate.join}
-  end
+  end    
 
   def add_letters(ship_length)
     letter_choices = []
