@@ -98,10 +98,14 @@ class PlayGame
   def player_guess
     display_boards
     p "Enter the coordinate for your shot:"
-    @guess = gets.chomp
+    @guess = gets.chomp.upcase
     until @comp_board.cells.include?(@guess) && !@all_player_guesses.include?(@guess)
+      if !@comp_board.cells.include?(@guess)
       p "Please enter a valid coordinate"
-      @guess = gets.chomp
+      else
+      p 'You already shot there'
+      end 
+      @guess = gets.chomp.upcase
     end
     @all_player_guesses << @guess
     @comp_board.cells["#{@guess}"].fire_upon
