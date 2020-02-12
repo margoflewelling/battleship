@@ -99,7 +99,7 @@ class PlayGame
     display_boards
     p "Enter the coordinate for your shot:"
     @guess = gets.chomp
-    if !@comp_board.cells.include?(@guess) || @all_player_guesses.include?(@guess)
+    until @comp_board.cells.include?(@guess) && !@all_player_guesses.include?(@guess)
       p "Please enter a valid coordinate"
       @guess = gets.chomp
     end
