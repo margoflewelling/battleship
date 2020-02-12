@@ -29,8 +29,8 @@ class PlayGame
     @message.place_cruiser
     cruiser_placement = gets.chomp.upcase.split(' ')
     until @player_board.valid_placement?(@player_cruiser, cruiser_placement)
-    p 'Those are invalid coordinates. Please try again!'
-    cruiser_placement = gets.chomp.upcase.split(' ')
+      p 'Those are invalid coordinates. Please try again!'
+      cruiser_placement = gets.chomp.upcase.split(' ')
     end
     @player_board.place(@player_cruiser, cruiser_placement)
   end
@@ -39,8 +39,8 @@ class PlayGame
     @message.place_sub
     sub_placement = gets.chomp.upcase.split(' ')
     until @player_board.valid_placement?(@player_sub, sub_placement)
-    p 'Those are invalid coordinates. Please try again!'
-    sub_placement = gets.chomp.upcase.split(' ')
+      p 'Those are invalid coordinates. Please try again!'
+      sub_placement = gets.chomp.upcase.split(' ')
     end
     @player_board.place(@player_sub, sub_placement)
   end
@@ -78,12 +78,11 @@ class PlayGame
     @letters = ["A", "B", "C", "D"]
     @numbers = [1, 2, 3, 4]
     if orientation == "h"
-    @placement = Array.new(ship_length,
-    @letters.sample(1))
-    add_numbers(ship_length)
+      @placement = Array.new(ship_length, @letters.sample(1))
+      add_numbers(ship_length)
     else
-    @placement = Array.new(ship_length, (@numbers.sample(1))[0])
-    add_letters(ship_length)
+      @placement = Array.new(ship_length, (@numbers.sample(1))[0])
+      add_letters(ship_length)
     end
     @coordinates
   end
@@ -98,10 +97,14 @@ class PlayGame
   def player_guess
     display_boards
     p "Enter the coordinate for your shot:"
-    @guess = gets.chomp
+    @guess = gets.chomp.upcase
     until @comp_board.cells.include?(@guess) && !@all_player_guesses.include?(@guess)
-      p "Please enter a valid coordinate"
-      @guess = gets.chomp
+      if !@comp_board.cells.include?(@guess)
+        p "Please enter a valid coordinate"
+      else
+        p 'You already shot there'
+      end
+      @guess = gets.chomp.upcase
     end
     @all_player_guesses << @guess
     @comp_board.cells["#{@guess}"].fire_upon
@@ -115,16 +118,16 @@ class PlayGame
     end
     @player_board.cells[@comp_guess[0]].fire_upon
     @all_computer_guesses << @comp_guess
-      return_comp_shot_result
+    return_comp_shot_result
   end
 
   def return_player_shot_result
     if @comp_board.cells["#{@guess}"].render == "M"
       puts "Your shot on #{@guess} was a miss"
     elsif @comp_board.cells["#{@guess}"].render == "H"
-        puts "Your shot on #{@guess} was a hit"
+      puts "Your shot on #{@guess} was a hit"
     elsif @comp_board.cells["#{@guess}"].render == "X"
-       puts "Your shot on #{@guess} sunk a ship"
+      puts "Your shot on #{@guess} sunk a ship"
     end
   end
 
@@ -132,7 +135,7 @@ class PlayGame
     if @player_board.cells[@comp_guess[0]].render == "M"
       puts "My shot on #{@comp_guess[0]} was a miss"
     elsif @player_board.cells[@comp_guess[0]].render == "H"
-       puts "My shot on #{@comp_guess[0]} was a hit"
+      puts "My shot on #{@comp_guess[0]} was a hit"
     elsif @player_board.cells[@comp_guess[0]].render == "X"
       puts "My shot on #{@comp_guess[0]} sunk a ship"
     end
@@ -157,9 +160,7 @@ class PlayGame
     place_the_cruiser
     place_the_sub
     display_boards
-    until comp_wins || player_wins
-       take_turn
-    end
+    take_turn until comp_wins || player_wins
     if comp_wins
       p "I won!"
     elsif player_wins

@@ -21,7 +21,7 @@ class CellTest < Minitest::Test
   end
 
   def test_cell_starts_empty_and_ship_can_be_placed
-    assert_equal nil, @cell.ship
+    assert_nil @cell.ship
     assert true, @cell.empty?
     @cell.place_ship(@cruiser)
     assert_equal @cruiser, @cell.ship
