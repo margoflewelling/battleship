@@ -5,21 +5,22 @@ require './lib/messages'
 require './play'
 
 
-
-@comp_board = Board.new
-@player_board = Board.new
-@comp_cruiser = Ship.new('Cruiser', 3)
-@player_cruiser = Ship.new('Cruiser', 3)
-@comp_sub = Ship.new('Submarine', 2)
-@player_sub = Ship.new('Submarine', 2)
-@message = Messages.new(@player_board, @comp_board)
 @game = PlayGame.new(@comp_board, @player_board, @message, @comp_cruiser, @comp_sub, @player_cruiser, @player_sub)
 
-
-@message.welcome
-
+@game.setup
+@game.message.welcome
 response = gets.chomp.upcase
 if response == 'P'
   @game.play_game
+  @game.message.play_again
+  response = gets.chomp.upcase
+  until response == 'N'
+    @game = PlayGame.new(@comp_board, @player_board, @message, @comp_cruiser, @comp_sub, @player_cruiser, @player_sub)
+    @game.setup
+    @game.play_game
+    @game.message.play_again
+    response = gets.chomp.upcase
+  end
+  p 'Ok. Good Playing!'
 else 'Ok. Bye!'
 end

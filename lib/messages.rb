@@ -26,6 +26,8 @@ class Messages
     p 'Enter the squares for the Submarine (2 spaces):'
   end
 
-
+  def play_again
+    p "Do you want to play again? (Y/N)"
+  end
 
 end

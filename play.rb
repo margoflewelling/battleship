@@ -2,6 +2,17 @@ class PlayGame
 
   attr_reader :board, :message, :cruiser, :submarine
 
+
+  def setup
+    @comp_board = Board.new
+    @player_board = Board.new
+    @comp_cruiser = Ship.new('Cruiser', 3)
+    @player_cruiser = Ship.new('Cruiser', 3)
+    @comp_sub = Ship.new('Submarine', 2)
+    @player_sub = Ship.new('Submarine', 2)
+    @message = Messages.new(@player_board, @comp_board)
+  end
+
   def initialize(comp_board, player_board, message, comp_cruiser, comp_sub, player_cruiser, player_sub)
     @comp_board = comp_board
     @player_board = player_board
@@ -88,7 +99,6 @@ class PlayGame
     display_boards
     p "Enter the coordinate for your shot:"
     @guess = gets.chomp
-# require "pry"; binding.pry
     if !@comp_board.cells.include?(@guess) || @all_player_guesses.include?(@guess)
       p "Please enter a valid coordinate"
       @guess = gets.chomp
@@ -155,7 +165,7 @@ class PlayGame
     elsif player_wins
       p "You won!"
     end
-
   end
+
 
 end
