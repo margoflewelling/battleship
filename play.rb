@@ -27,20 +27,20 @@ class PlayGame
 
   def place_the_cruiser
     @message.place_cruiser
-    cruiser_placement = gets.chomp.split(' ')
+    cruiser_placement = gets.chomp.upcase.split(' ')
     until @player_board.valid_placement?(@player_cruiser, cruiser_placement)
     p 'Those are invalid coordinates. Please try again!'
-    cruiser_placement = gets.chomp.split(' ')
+    cruiser_placement = gets.chomp.upcase.split(' ')
     end
     @player_board.place(@player_cruiser, cruiser_placement)
   end
 
   def place_the_sub
     @message.place_sub
-    sub_placement = gets.chomp.split(' ')
+    sub_placement = gets.chomp.upcase.split(' ')
     until @player_board.valid_placement?(@player_sub, sub_placement)
     p 'Those are invalid coordinates. Please try again!'
-    sub_placement = gets.chomp.split(' ')
+    sub_placement = gets.chomp.upcase.split(' ')
     end
     @player_board.place(@player_sub, sub_placement)
   end
