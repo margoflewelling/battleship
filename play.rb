@@ -11,8 +11,8 @@ class PlayGame
       @message.play_again
       @response = gets.chomp.upcase
       while @response == 'Y'
-        @game = PlayGame.new(@comp_board, @player_board, @message, @comp_cruiser, @comp_sub, @player_cruiser, @player_sub)
         setup
+        @game = PlayGame.new(@comp_board, @player_board, @message, @comp_cruiser, @comp_sub, @player_cruiser, @player_sub)
         play_game
         @game.message.play_again
         @response = gets.chomp.upcase
@@ -34,6 +34,8 @@ class PlayGame
     @comp_sub = Ship.new('Submarine', 2)
     @player_sub = Ship.new('Submarine', 2)
     @message = Messages.new(@player_board, @comp_board)
+    @all_player_guesses = []
+    @all_computer_guesses = []
   end
 
   def initialize(comp_board, player_board, message, comp_cruiser, comp_sub, player_cruiser, player_sub)
