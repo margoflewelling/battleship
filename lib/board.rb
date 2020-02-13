@@ -18,11 +18,15 @@ class Board
   end
 
   def valid_placement?(ship, placement)
-    if ship.length == placement.length && consecutive_placements(placement)
+    ship.length == placement.length && consecutive_placements(placement) && on_board_placement(placement) &&
     no_overlapping_ships?(placement)
-    else
-      false
+  end
+
+  def on_board_placement(placement)
+    placement.all? do |coordinate|
+      valid_coordinate?(coordinate)
     end
+
   end
 
   def consecutive_placements(placement)
